@@ -1,0 +1,49 @@
+{
+  "name": "ez-php/asyncapi",
+  "version": "2.5.10",
+  "description": "AsyncAPI 3.0 document generation for broadcast channels, webhooks and WebSocket messages, attribute-driven",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andreas Uretschnig",
+      "email": "andreas.uretschnig@gmail.com"
+    }
+  ],
+  "keywords": ["asyncapi", "documentation", "broadcast", "webhook", "websocket", "php", "ez-php"],
+  "homepage": "https://github.com/ez-php/asyncapi",
+  "support": {
+    "issues": "https://github.com/ez-php/asyncapi/issues",
+    "source": "https://github.com/ez-php/asyncapi"
+  },
+  "require": {
+    "php": "^8.5",
+    "ez-php/contracts": "^2.0",
+    "ez-php/http": "^2.0",
+    "ez-php/json-schema": "^2.0"
+  },
+  "require-dev": {
+    "ez-php/docker": "^2.0",
+    "phpunit/phpunit": "^13.0",
+    "phpstan/phpstan": "^2.1",
+    "friendsofphp/php-cs-fixer": "^3.94",
+    "phpstan/phpstan-strict-rules": "^2.0",
+    "phpstan/phpstan-deprecation-rules": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "EzPhp\\AsyncApi\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "cs": "php-cs-fixer fix",
+    "analyse": "phpstan analyse",
+    "test": "phpunit",
+    "full": "composer analyse && composer cs && composer test"
+  }
+}
