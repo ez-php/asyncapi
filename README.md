@@ -58,7 +58,7 @@ return [
 ];
 ```
 
-There is no discovery: only listed classes are documented. A listed class that is missing, lacks an attribute, or clashes on short name throws `AsyncApiException`. Title and version come from `app.name` / `app.version`.
+There is no discovery: only listed classes are documented. A listed class that is missing, lacks an attribute, clashes on short name, or has an address that maps to another address's channel id (`orders.{id}` and `orders/{id}` both become `orders_id`) throws `AsyncApiException`. Title and version come from `app.name` / `app.version`.
 
 ## Output
 

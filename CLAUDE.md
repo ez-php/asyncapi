@@ -289,7 +289,7 @@ tests/
 ├── TestCase.php                    — Base PHPUnit test case (identical in every package)
 ├── AsyncApiGeneratorTest.php       — channel merging, parameters, operations, components/schemas, invalid classes
 ├── AsyncApiServiceProviderTest.php — config wiring, endpoint, defaults without config/router, controller JSON
-└── Support/                        — message fixtures (AsyncApiOrderShipped/Cancelled/ChatMessage, invalid ones), fake container/config/router
+└── Support/                        — message fixtures (AsyncApiOrderShipped/Cancelled/Refunded/ChatMessage, invalid ones), fake container/config/router
 ```
 
 ---
@@ -313,11 +313,15 @@ tests/
   classes sharing an address merge into one channel (the first description wins).
 - **A misconfigured class throws.** Unlike openapi's "bare operation" fallback for missing handlers, a
   listed class that doesn't exist, lacks an attribute, declares an action other than `send`/`receive`,
-  or clashes on short name raises `AsyncApiException` — the list is hand-written, so a mistake should
+  clashes on short name, or whose address maps to another address's channel id raises `AsyncApiException` — the list is hand-written, so a mistake should
   be loud rather than produce a silently incomplete document. Missing router/config in CLI or minimal
   containers still degrade to defaults, as in openapi.
 - **Short class names are component keys.** Same convention as openapi's `$ref`s; two classes with the
   same short name cannot both be documented.
+- **Channel ids are derived from the address and must stay unique.** Braces are stripped and every run of
+  characters outside `[A-Za-z0-9_-]` becomes `_`, so `orders.{orderId}` and `orders/{orderId}` both become
+  `orders_orderId`. Two different addresses with one id throw instead of being merged under the first
+  address.
 - **Channel parameters carry no schema.** AsyncAPI 3.0 parameters are strings; `{param}` placeholders
   become empty Parameter Objects (no description/enum yet).
 - **JSON Schema 2020-12 payloads as-is.** The default AsyncAPI schema format is a JSON Schema superset;

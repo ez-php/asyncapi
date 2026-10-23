@@ -65,6 +65,16 @@ final readonly class AsyncApiGenerator
             }
 
             $channelId = $this->channelId($channel->address);
+
+            if (isset($channels[$channelId]) && $channels[$channelId]['address'] !== $channel->address) {
+                throw new AsyncApiException(sprintf(
+                    'Channel addresses "%s" and "%s" map to the same channel id "%s"; channel ids must be unique.',
+                    $channels[$channelId]['address'],
+                    $channel->address,
+                    $channelId,
+                ));
+            }
+
             $channels[$channelId] ??= ['address' => $channel->address, 'messages' => []] + $this->parameters($channel->address);
 
             if ($channel->description !== null && !isset($channels[$channelId]['description'])) {

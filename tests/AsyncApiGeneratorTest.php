@@ -15,6 +15,7 @@ use PHPUnit\Framework\Attributes\UsesClass;
 use Tests\Support\AsyncApiBadAction;
 use Tests\Support\AsyncApiChatMessage;
 use Tests\Support\AsyncApiOrderCancelled;
+use Tests\Support\AsyncApiOrderRefunded;
 use Tests\Support\AsyncApiOrderShipped;
 use Tests\Support\AsyncApiUnannotated;
 
@@ -132,6 +133,7 @@ final class AsyncApiGeneratorTest extends TestCase
             'no #[Message]' => [[AsyncApiUnannotated::class], 'needs both #[Channel] and #[Message]'],
             'invalid action' => [[AsyncApiBadAction::class], 'action must be "send" or "receive"'],
             'short name clash' => [[AsyncApiOrderShipped::class, Support\Other\AsyncApiOrderShipped::class], 'share the short name'],
+            'channel id clash' => [[AsyncApiOrderShipped::class, AsyncApiOrderRefunded::class], 'map to the same channel id "orders_orderId"'],
         ];
     }
 
