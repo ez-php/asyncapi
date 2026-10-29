@@ -349,7 +349,7 @@ tests/
 | Concern | Where it belongs |
 |---|---|
 | HTTP API documentation | `ez-php/openapi` |
-| Rendering the document (AsyncAPI Studio / HTML) | Application layer or a future UI module (cf. `ez-php/swagger-ui`) |
+| Rendering the document (AsyncAPI Studio / HTML) | `ez-php/asyncapi-ui` |
 | YAML output, code generation | Not in scope |
 | Payload schema generation itself | `ez-php/json-schema` |
 | Sending/receiving the messages | `ez-php/broadcast`, `ez-php/webhook`, `ez-php/websocket` |
