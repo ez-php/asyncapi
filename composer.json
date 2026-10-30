@@ -1,6 +1,6 @@
 {
   "name": "ez-php/asyncapi",
-  "version": "2.6.3",
+  "version": "2.6.4",
   "description": "AsyncAPI 3.0 document generation for broadcast channels, webhooks and WebSocket messages, attribute-driven",
   "type": "library",
   "license": "MIT",
